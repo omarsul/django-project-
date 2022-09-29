@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freinds</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Hello, {{loged.alias}}</h1>
+        <h3>here is the list of your friends: </h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Alias</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tbody>
+                    {% if friends  %}
+                        {% for friend in friends %}
+                            <tr>
+                                <th scope="row"></th>
+                                <td>{{friend.alias}}</td>
+                                <td>
+                                    <a href="{% url 'profile' friend.id %}">View profile</a>
+                                    <a href="{% url 'del' friend.id %}">Remove as frined</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </tbody>
+        </table>
+        <br><br><br>
+        <h3>Other Users not on your friends list:</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Alias</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tbody>
+                    {% for other in others %}
+                        <tr>
+                            <th scope="row"></th>
+                            <td><a href="{% url 'profile' other.id %}">{{other.alias}}</a></td>
+                            <td>
+                                <a href="{% url 'add' other.id %}">Add as friend</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+</html>
